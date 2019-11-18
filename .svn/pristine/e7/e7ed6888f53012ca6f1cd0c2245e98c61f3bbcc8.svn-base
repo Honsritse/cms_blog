@@ -1,0 +1,6 @@
+package com.briup.dao.extend;
+
+public interface CommentExtendMapper{
+
+	
+}

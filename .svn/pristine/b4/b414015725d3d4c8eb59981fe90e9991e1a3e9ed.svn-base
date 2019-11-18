@@ -1,0 +1,39 @@
+package com.briup.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.briup.bean.extend.ArticleExtend;
+import com.briup.dao.extend.ArticleExtendMapper;
+import com.briup.service.IArticleService;
+
+@Service
+public class ArticleServiceImpl implements IArticleService {
+
+	@Autowired
+	private ArticleExtendMapper articleMapper;
+	
+	
+	@Override
+	public List<ArticleExtend> findAll() {
+
+		return articleMapper.selectAll();
+	}
+
+	@Override
+	public ArticleExtend findById(long id) {
+		return articleMapper.selectById(id);
+	}
+	
+	@Override
+	public void saveAllArticle() {
+		// TODO Auto-generated method stub
+
+	}
+
+
+
+
+}

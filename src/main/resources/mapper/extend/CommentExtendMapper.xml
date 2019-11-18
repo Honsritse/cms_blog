@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.dao.extend.CommentExtendMapper">
+	<select id="findAllCascade" resultMap="CommentResultMapper">
+		select *
+		from cms_comment
+	</select>
+	<select id="selectById" parameterType="long" resultMap="CommentResultMapper">
+		select *
+		from cms_comment
+		where parent_id = #{id,jdbcType=BIGINT}
+	</select>
+	<select id="findById" parameterType="long" resultMap="CommentResultMapper">
+		select *
+		from cms_comment
+		where
+		id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<resultMap type="com.briup.bean.extend.CommentExtend"
+		id="CommentResultMapper"
+		extends="com.briup.dao.CommentMapper.BaseResultMap">
+		<collection column="id" property="replayComments"
+			select="selectById"></collection>
+	</resultMap>
+
+
+</mapper>

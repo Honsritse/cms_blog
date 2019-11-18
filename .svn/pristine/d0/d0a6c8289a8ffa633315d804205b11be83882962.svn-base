@@ -1,0 +1,16 @@
+package com.briup.service;
+
+import com.briup.bean.Comment;
+
+public interface ICommentService {
+
+// 分页展示所有评论
+// 分页展示所有评论及回复
+// 显示某一评论的所有回复
+// 回复某一评论
+	void reply(Comment comment);
+// 审核某一评论
+	boolean examine(Comment comment);
+	
+	
+}

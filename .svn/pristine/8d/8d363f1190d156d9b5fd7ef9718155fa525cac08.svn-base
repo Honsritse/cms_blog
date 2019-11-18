@@ -1,0 +1,61 @@
+package com.briup.service.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.briup.bean.Category;
+import com.briup.bean.CategoryExample;
+import com.briup.bean.extend.CategoryExtend;
+import com.briup.dao.CategoryMapper;
+import com.briup.dao.extend.CategoryExtendMapper;
+import com.briup.service.ICategoryService;
+
+
+@Service
+public class CategoryServiceImpl implements ICategoryService {
+
+	@Resource
+	private CategoryMapper categoryMapper;
+	@Resource
+	private CategoryExtendMapper categoryEMapper;
+	
+	@Override
+	public void deleteAll() {
+		categoryMapper.deleteByExample(new CategoryExample());
+	}
+
+	@Override
+	public void deleteById(long id) {
+		categoryMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public void saveOrUpdate(Category category) {
+		
+		if(categoryMapper.selectByPrimaryKey(category.getId()) != null) {
+			categoryMapper.updateByPrimaryKey(category);
+		}else {
+			categoryMapper.insert(category);
+		}
+		
+	}
+
+	@Override
+	public List<Category> findAll() {
+		return categoryMapper.selectByExample(new CategoryExample());
+	}
+
+	@Override
+	public Category findById(long id) {
+		return categoryMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public CategoryExtend findByIdCascade(long id) {
+		return categoryEMapper.findByIdCascade(id);
+	}
+
+}

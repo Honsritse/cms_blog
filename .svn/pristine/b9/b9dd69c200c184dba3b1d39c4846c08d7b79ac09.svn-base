@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>看点资讯精选</title>
+  <link rel="stylesheet" href="./static/bootstrap-3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./static/css/layout.css">
+  <script src="./static/js/jquery-3.4.1.min.js"></script>
+  <script src="./static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    .tbl td {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- 外部容器 -->
+  <div class="container-layout">
+    <div class="top_bar"></div>
+    <div class="wrap">
+      <!-- 左侧导航 -->
+      <div class="nav_left">
+        <!-- 标题 -->
+        <div class="title">
+          <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>看点资讯精选后台
+        </div>
+        <!-- 列表 -->
+        <ul class="nav_list">
+          <li>
+            <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+            <a href="./index.html">首页</a>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </li>
+          <li>
+            <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+            <a href="./category.html">栏目管理</a>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </li>
+          <li>
+            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+            <a href="./message.html">资讯管理</a>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </li>
+          <li class="current">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <a href="./user.html">用户管理</a>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </li>
+        </ul>
+      </div>
+      <!-- 右侧内容 -->
+      <div class="content_right">
+        <div class="top_bar">
+          <!-- 用户信息 -->
+          <div class="user_info">
+            <img src="./static/images/tx.jpg" alt="">
+            <span>胡六</span>
+          </div>
+        </div>
+        <div class="content">
+          <div class="title"> 用户管理 </div>
+          <div class="btns">
+              <button type="button" class="btn btn-primary  btn-sm"  data-toggle="modal" data-target=".bs-example-modal-lg">添加</button>
+              <button type="button" class="btn btn-danger  btn-sm">批量删除</button>
+          </div>
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th width="50px">编号</th>
+                <th width="200px">用户名</th>
+                <th width="200px">真实姓名</th>
+                <th>手机号</th>
+                <th>email</th>
+                <th>状态</th>
+                <th width="160px">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="checkbox">
+                </td>
+                <td>charles</td>
+                <td>乔美丽</td>
+                <td>18896711234</td>
+                <td>qml@briup.com</td>
+                <td>正常</td>
+                <td>
+                  <a href="#">删除</a>
+                  <a href="#">修改</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="checkbox">
+                </td>
+                <td>charles</td>
+                <td>乔美丽</td>
+                <td>18896711234</td>
+                <td>qml@briup.com</td>
+                <td>正常</td>
+                <td>
+                  <a href="#">删除</a>
+                  <a href="#">修改</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="checkbox">
+                </td>
+                <td>charles</td>
+                <td>乔美丽</td>
+                <td>18896711234</td>
+                <td>qml@briup.com</td>
+                <td>正常</td>
+                <td>
+                  <a href="#">删除</a>
+                  <a href="#">修改</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="checkbox">
+                </td>
+                <td>charles</td>
+                <td>乔美丽</td>
+                <td>18896711234</td>
+                <td>qml@briup.com</td>
+                <td>正常</td>
+                <td>
+                  <a href="#">删除</a>
+                  <a href="#">修改</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模态框 -->
+  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">添加栏目</h4>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">栏目名称</label>
+                      <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">父栏目</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputPassword3" placeholder="">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">描述</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary btn-sm">保存</button>
+              </div>
+            </div><!-- /.modal-content -->
+      </div>
+    </div>
+
+  
+</body>
+</html>

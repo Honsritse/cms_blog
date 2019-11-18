@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.dao.extend.ArticleExtendMapper">
+
+	<!-- 嵌套选择查询 -->
+	<resultMap id="ArticleExtendResultMap1"
+		type="com.briup.bean.extend.ArticleExtend"
+		extends="com.briup.dao.ArticleMapper.BaseResultMap">
+		<association property="category" column="category_id"
+			select="com.briup.dao.CategoryMapper.selectByPrimaryKey"></association>
+	</resultMap>
+
+	<select id="selectAll" resultMap="ArticleExtendResultMap1">
+		SELECT *
+		FROM cms_article
+	</select>
+
+	<!-- 嵌套结果查询 -->
+	<!-- 栏目 -->
+	<resultMap type="com.briup.bean.Category"
+		id="CatagoryResultMap">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="description" property="description" />
+		<result column="no" property="no" />
+		<result column="parent_id" property="parentId" />
+	</resultMap>
+
+	<!-- 评论 -->
+	<resultMap type="com.briup.bean.Comment"
+		id="CommentResultMap">
+		<id column="id" property="id" />
+		<result column="comment" property="content" />
+		<result column="comment_time" property="commentTime" />
+		<result column="cStatus" property="status" />
+		<result column="user_id" property="userId" />
+		<result column="article_id" property="articleId" />
+		<result column="cParent_id" property="parentId" />
+	</resultMap>
+
+	<!-- 文章 -->
+	<resultMap id="ArticleExtendResultMap2"
+		type="com.briup.bean.extend.ArticleExtend"
+		extends="com.briup.dao.ArticleMapper.BaseResultMap">
+		<association property="category"
+			resultMap="CatagoryResultMap"></association>
+		<collection property="comments"
+			resultMap="CommentResultMap">
+		</collection>
+	</resultMap>
+
+	<select id="selectById" parameterType="long"
+		resultMap="ArticleExtendResultMap2">
+		SELECT ca.id, ca.title, ca.content, ca.source,
+		ca.publish_time, ca.read_times,
+		ca.status, ca.thump_up, ca.thump_down,
+		ca.author_id, ca.category_id,
+		ct.id, ct.name, ct.description, ct.no,
+		ct.parent_id, ck.id,
+		ck.content as comment, ck.comment_time,
+		ck.status as cStatus, ck.user_id,
+		ck.article_id,
+		ck.parent_id as cParent_id
+		FROM cms_article as
+		ca ,cms_comment as ck,
+		cms_category as ct
+		WHERE
+		ca.id = ck.article_id
+		AND
+		ca.category_id = ct.id
+		and
+		ck.article_id =
+		#{id,jdbcType=BIGINT}
+	</select>
+
+</mapper>
+
+
+<!-- <select id="selectById" parameterType="long" resultMap="ArticleExtendResultMap2"> 
+	SELECT * FROM cms_article WHERE id = #{id,jdbcType=BIGINT} </select> -->
+<!-- select="com.briup.dao.extend.CommentExtendMapper.selectByArticleId" -->
