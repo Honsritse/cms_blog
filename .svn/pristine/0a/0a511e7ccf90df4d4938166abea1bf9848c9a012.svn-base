@@ -1,9 +1,0 @@
-package com.briup.dao.extend;
-
-import com.briup.bean.extend.CategoryExtend;
-
-public interface CategoryExtendMapper{
-
-	CategoryExtend findByIdCascade(long id);
-	
-}
