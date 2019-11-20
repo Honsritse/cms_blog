@@ -22,4 +22,6 @@ public interface IPrivalegeService {
 	void saveOrUpdate(Privilege privilege) throws CustomException;
 
 	List<PrivilegeTree> findPrivilegeTree();
+	
+	void removeById(long id);
 }

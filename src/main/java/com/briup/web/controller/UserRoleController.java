@@ -57,7 +57,7 @@ public class UserRoleController {
 	}
 	
 	@ApiOperation("设置用户角色")
-	@GetMapping("/setRoles")
+	@PostMapping("/setRoles")
 	public Message setRoles(UserRoleVM userRole) {
 		userService.setRoles(userRole.getId(),userRole.getRoles());
 		return MessageUtil.success("设置完成");

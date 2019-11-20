@@ -20,6 +20,7 @@ import com.briup.dao.extend.UserExtendMapper;
 import com.briup.exception.CustomException;
 import com.briup.service.IUserService;
 import com.briup.util.StatusNo;
+import com.briup.vm.UserVM;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -28,6 +29,28 @@ public class UserServiceImpl implements IUserService {
 	private UserExtendMapper userMapper;
 	@Resource
 	private UserRoleMapper userRoleMapper;
+
+	@Override
+	public User login(UserVM userVM) throws CustomException {
+
+		System.out.println("DEBUG:" + userVM.getUsername() + ":" + userVM.getPassword());
+
+		UserExample example = new UserExample();
+		example.createCriteria().andUsernameEqualTo(userVM.getUsername());
+
+		List<User> list = userMapper.selectByExample(example);
+		if (list.size() < 1) {
+			throw new CustomException("用户不存在");
+		}
+		User user = list.get(0);
+
+		System.out.println("DEBUG:" + user.getUsername() + ":" + user.getPassword());
+
+		if (!user.getPassword().equals(userVM.getPassword())) {
+			throw new CustomException("密码不正确");
+		}
+		return user;
+	}
 
 	@Override
 	public UserExtend findById(long id) {
@@ -85,33 +108,33 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public void setRoles(long id, List<Long> roles) {
-		
-		//获取当前用户的所有角色
+
+		// 获取当前用户的所有角色
 		UserRoleExample example = new UserRoleExample();
 		example.createCriteria().andUserIdEqualTo(id);
-		
+
 		List<UserRole> list = userRoleMapper.selectByExample(example);
 		List<Long> exist_userRoles = new ArrayList<Long>();
 
-		//已赋予角色存储在exist_userRole中
+		// 已赋予角色存储在exist_userRole中
 		ListIterator<UserRole> listIterator = list.listIterator();
 		while (listIterator.hasNext()) {
 			exist_userRoles.add(listIterator.next().getRoleId());
 		}
 
-		//增加没有的
+		// 增加没有且不重合的
 		for (Long add_role : roles) {
-			if(!exist_userRoles.contains(add_role)) {
+			if (!exist_userRoles.contains(add_role)) {
 				UserRole userRole = new UserRole();
 				userRole.setRoleId(add_role);
 				userRole.setUserId(id);
 				userRoleMapper.insert(userRole);
 			}
 		}
-		
-		//删除已有的
-		for(UserRole exist_role : list) {
-			if(roles.contains(exist_role.getRoleId())) {
+
+		// 删除已有且不重合的
+		for (UserRole exist_role : list) {
+			if (!roles.contains(exist_role.getRoleId())) {
 				userRoleMapper.deleteByPrimaryKey(exist_role.getId());
 			}
 		}

@@ -52,5 +52,12 @@ public class PriviligeController {
 		List<PrivilegeTree> list = privalegeService.findPrivilegeTree();
 		return MessageUtil.success("查询成功",list);
 	}
+	
+	@ApiOperation(value = "根据ID删除")
+	@GetMapping("/deleteById")
+	public Message deleteById(Long id) {
+		privalegeService.removeById(id);
+		return MessageUtil.success("删除成功");
+	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.briup.bean.User;
 import com.briup.bean.extend.UserExtend;
 import com.briup.exception.CustomException;
+import com.briup.vm.UserVM;
 
 /**
  * 
@@ -17,6 +18,8 @@ import com.briup.exception.CustomException;
 
 public interface IUserService {
 
+	 User login(UserVM userVM) throws CustomException;
+	
 	UserExtend findById(long id);
 
 	List<User> findAll();

@@ -48,4 +48,9 @@ public class PrivalegeServiceImpl implements IPrivalegeService {
 		return privalegeMapper.selectAll();
 	}
 
+	@Override
+	public void removeById(long id) {
+		privalegeMapper.deleteByPrimaryKey(id);
+	}
+
 }
