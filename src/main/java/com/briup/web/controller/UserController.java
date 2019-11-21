@@ -41,16 +41,15 @@ public class UserController {
 	@ApiOperation(value = "用户登录")
 	@PostMapping("/login")
 	public Message login(@RequestBody UserVM userVM) {
-		// 1. 认证用户的用户名和密码
         User user = userService.login(userVM);
-        // 2. 如果登录成功产生token,将token缓存起来，返回
         String token = JwtTokenUtil.createJWT(user.getId(), user.getUsername());
         Map<String,String> map = new HashMap<>();
         map.put("token",token);
 		return MessageUtil.success("认证成功", map);
-		// 3. 如果登录失败抛出异常
 	}
+	
 
+	
 	@ApiOperation(value = "用户登出")
     @PostMapping("logout")
     public Message logout(){
