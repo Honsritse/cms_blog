@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CmsJd1908Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CmsJd1908Application.class, args);
+		SpringApplication.run(CmsApplication.class, args);
 	}
 
 }
